@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "color-string": "^2.1.4",
+    "jimp": "^1.6.0"
+  }
+}
