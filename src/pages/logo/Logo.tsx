@@ -1,22 +1,18 @@
-import { AsciifyLogoPhysics } from '../../assets/asciify/asciify'
+import { useAsciifyLogoPhysics } from '../../assets/asciify/asciify'
+import { GridBg } from '../../assets/backgrounds/gridBg'
 import './logo.css'
 
-function Test(){
-    let text = 'Homer'
-    let textList = text.split('')
-    return(  
-        <div className="test">
-            {textList.map((letter, index) => (
-                <h1>{letter}</h1>
-            ))}
-        </div>
-    )
-}
-
 export default function Logo(){
+    const { canvasRef, logoImgRef } = useAsciifyLogoPhysics()
+
     return(
-        <>
-            <AsciifyLogoPhysics imagePath="/imgs/image.png"/>
-        </>
+        <section className="hero">
+            <GridBg color="#171717">
+                <canvas ref={canvasRef}></canvas>
+                <div className="logo">
+                    <img ref={logoImgRef} src="/imgs/image.png" id="source" />
+                </div>
+            </GridBg>
+        </section>
     )
 }

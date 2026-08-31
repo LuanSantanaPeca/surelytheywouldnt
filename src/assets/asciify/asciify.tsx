@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './asciify.css'
 
-export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
+export function useAsciifyLogoPhysics(charColor: string, charColorLight: string, floating: boolean){
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const logoImgRef = useRef<HTMLImageElement>(null)
 
@@ -18,8 +18,8 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
         let CELL_SIZE = 8
         let CELL_GAP = 2
         let CELL_STEP = CELL_SIZE + CELL_GAP
-        const GRID_COLOR = '#171717'
-        const CHAR_COLOR = "#dadada"
+        //const GRID_COLOR = '#171717'
+        const CHAR_COLOR = charColor
         const ASCII_CHARS = " .:+*SURELYTHEYWOULDNT"
         const THRESHOLD = 0.5
         const PUSH_RADIUS = 5.5
@@ -27,6 +27,8 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
         const SPRING = 0.1
         const DAMPING = 0.5
         const dpr = window.devicePixelRatio || 1
+        let floatingOffsetX = 0
+        let floatingOffsetY = 0
 
         let cols = 0, rows = 0, cells: unknown[] = []
 
@@ -34,34 +36,26 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
             CELL_SIZE = window.innerWidth < 768 ? 3 : 8
             CELL_GAP = window.innerWidth < 768 ? 1 : 2
             CELL_STEP = CELL_SIZE + CELL_GAP
-            cols = Math.floor(window.innerWidth / CELL_STEP)
-            rows = Math.floor(window.innerHeight / CELL_STEP)
-            canvasEl.width = window.innerWidth / dpr
-            canvasEl.height = window.innerHeight / dpr
+            const width = canvasEl.clientWidth || window.innerWidth
+            const height = canvasEl.clientHeight || window.innerHeight
+            cols = Math.floor(width / CELL_STEP)
+            rows = Math.floor(height / CELL_STEP)
+            canvasEl.width = width * dpr
+            canvasEl.height = height * dpr
             context.setTransform(dpr, 0, 0, dpr, 0, 0)
         }
 
-        function drawGrid(){
-            context.clearRect(0, 0, window.innerWidth, window.innerHeight)
-            context.fillStyle = GRID_COLOR
-            for(let row=0; row<rows; row++){
-                for(let col=0; col<cols; col++){
-                    ctx?.fillRect(col*CELL_STEP, row*CELL_STEP, CELL_SIZE, CELL_SIZE)
-                }
-            }
-        }
-
         setupCanvas()
-        drawGrid()
 
         function sampleLogoIntoCells(){
             const logoImg = logoImgRef.current
             if (!logoImg) return
+            const canvasRect = canvasEl.getBoundingClientRect()
             const rect = logoImg.getBoundingClientRect()
             const logoCols = Math.ceil(rect.width / CELL_STEP)
             const logoRows = Math.ceil(rect.height / CELL_STEP)
-            const startCol = Math.floor(rect.left / CELL_STEP)
-            const startRow = Math.floor(rect.top / CELL_STEP)
+            const startCol = Math.floor((rect.left - canvasRect.left) / CELL_STEP)
+            const startRow = Math.floor((rect.top - canvasRect.top) / CELL_STEP)
 
             const sampleCanvas = document.createElement('canvas')
             if(!sampleCanvas) return
@@ -105,6 +99,7 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
                         offsetY: 0,
                         velX: 0,
                         velY: 0,
+                        charColor: charColor
                     })
                 }
             }
@@ -115,18 +110,24 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
             ctx.font = `${CELL_SIZE + 2}px monospace`
             ctx.textBaseline = "top"
             ctx.textAlign = "center"
-            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
-
+            ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
+            /*
             ctx.fillStyle = GRID_COLOR
             for(const cell of cells as {col: number, row: number}[]){
                 ctx.fillRect(cell.col * CELL_STEP, cell.row * CELL_STEP, CELL_SIZE, CELL_SIZE)
-            }
+            }*/
 
-            ctx.fillStyle = CHAR_COLOR
-            for(const cell of cells as {col: number, row: number, char: string, isLit: boolean, offsetX: number, offsetY: number, velX: number, velY: number}[]){
+            for(const cell of cells as {col: number, row: number, char: string, isLit: boolean, offsetX: number, offsetY: number, velX: number, velY: number, charColor: string}[]){
                 if(!cell.isLit) continue
-                const x = (cell.col + Math.round(cell.offsetX)) * CELL_STEP
-                const y = (cell.row + Math.round(cell.offsetY)) * CELL_STEP
+                ctx.fillStyle = cell.charColor
+                let x = 0, y = 0
+                if(!floating){
+                    x = (cell.col + Math.round(cell.offsetX)) * CELL_STEP
+                    y = (cell.row + Math.round(cell.offsetY)) * CELL_STEP
+                } else {
+                    x = (cell.col + Math.round(cell.offsetX + floatingOffsetX)) * CELL_STEP
+                    y = (cell.row + Math.round(cell.offsetY + floatingOffsetY)) * CELL_STEP
+                }
                 ctx.fillText(cell.char, x + CELL_SIZE / 2, y)
             }
         }
@@ -138,31 +139,68 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
         }
 
         window.addEventListener('resize', init)
-        logoImgRef.current?.complete ? init() : logoImgRef.current?.addEventListener('load', init)
+        const logoImg = logoImgRef.current
+        if (logoImg?.complete) init()
+        else logoImg?.addEventListener('load', init)
 
-        setInterval(() => {
+        const visibilityObserver = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) init()
+        }, { threshold: 0 })
+        visibilityObserver.observe(canvasEl)
+
+        const scrambleId = setInterval(() => {
             for (const cell of cells as {col: number, row: number, char: string, isLit: boolean, offsetX: number, offsetY: number, velX: number, velY: number}[]){
                 if(cell.isLit){
                     cell.char = ASCII_CHARS[Math.floor(Math.random() * ASCII_CHARS.length)]
                 }
             }
             renderFrame()
-        }, 200)
+        }, 500)
+
+        setInterval(() => {
+            if(floating){
+                for(let i=0; i<1000; i++){
+                    if(i < 500){
+                        floatingOffsetX -= 0.5
+                    } else {
+                        floatingOffsetX += 0.5
+                    }
+                    if(i < 500){
+                        floatingOffsetY -= 0.5
+                    } else {
+                        floatingOffsetY += 0.5
+                    }
+                }
+                /*
+                if(Math.random() < 0.5 && floatingOffsetX < 3 && floatingOffsetX > -3){
+                    floatingOffsetX -= 0.5
+                } else if(Math.random() > 0.5 && floatingOffsetX < 3 && floatingOffsetX > -3){
+                    floatingOffsetX += 0.5
+                }
+                if(Math.random() < 0.5 && floatingOffsetY < 3 && floatingOffsetY > -3){
+                    floatingOffsetY -= 0.5
+                } else if(Math.random() > 0.5 && floatingOffsetY < 3 && floatingOffsetY > -3){
+                    floatingOffsetY += 0.5
+                }*/
+            }
+        }, 1)
 
         let mouse = { col: -999, row: -999, isMoving: false }
         let idleTimer = null as unknown
 
         function updatePhysics(){
-            for(const cell of cells as {col: number, row: number, char: string, isLit: boolean, offsetX: number, offsetY: number, velX: number, velY: number}[]){
+            for(const cell of cells as {col: number, row: number, char: string, isLit: boolean, offsetX: number, offsetY: number, velX: number, velY: number, charColor: string}[]){
                 if (!cell.isLit) continue
                 if(mouse.isMoving){
-                    const dx = cell.col + cell.offsetX - mouse.col
-                    const dy = cell.row + cell.offsetY - mouse.row
+                    const dx = cell.col + cell.offsetX - mouse.col + floatingOffsetX
+                    const dy = cell.row + cell.offsetY - mouse.row + floatingOffsetY
                     const dist = Math.sqrt(dx * dx + dy * dy)
                     if (dist < PUSH_RADIUS && dist > 0){
                         const force = (1 - dist / PUSH_RADIUS) ** 2 * PUSH_FORCE
                         cell.velX += (dx / dist) * force
                         cell.velY += (dy / dist) * force
+                        cell.char ="?" 
+                        cell.charColor = charColorLight
                     }
                 }
                 cell.velX += -cell.offsetX * SPRING
@@ -173,9 +211,11 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
                 cell.offsetY += cell.velY
                 if(Math.abs(cell.offsetX) < 0.01 && Math.abs(cell.velX) < 0.01){
                     cell.offsetX = cell.velX = 0
+                    cell.charColor = charColor
                 }
                 if(Math.abs(cell.offsetY) < 0.01 && Math.abs(cell.velY) < 0.01){
                     cell.offsetY = cell.velY = 0
+                    cell.charColor = charColor
                 }
             }
         }
@@ -187,8 +227,9 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
         }
 
         window.addEventListener('mousemove', (e) => {
-            mouse.col = e.clientX / CELL_STEP
-            mouse.row = e.clientY / CELL_STEP
+            const canvasRect = canvasEl.getBoundingClientRect()
+            mouse.col = (e.clientX - canvasRect.left) / CELL_STEP
+            mouse.row = (e.clientY - canvasRect.top) / CELL_STEP
             mouse.isMoving = true
             clearTimeout(idleTimer as unknown as number)
             idleTimer = setTimeout(() => {
@@ -203,16 +244,13 @@ export function AsciifyLogoPhysics({imagePath}: {imagePath: string}){
 
         animationLoop()
 
-        return () => window.removeEventListener('resize', init)
+        return () => {
+            window.removeEventListener('resize', init)
+            visibilityObserver.disconnect()
+            clearInterval(scrambleId)
+            logoImg?.removeEventListener('load', init)
+        }
     }, [])
 
-    return(
-        <section className="hero">
-            <canvas ref={canvasRef}></canvas>
-
-            <div className="logo">
-                <img ref={logoImgRef} src={imagePath} id="source" />
-            </div>
-        </section>
-    )
+    return { canvasRef, logoImgRef }
 }

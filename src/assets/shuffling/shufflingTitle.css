@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+span{
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+}
