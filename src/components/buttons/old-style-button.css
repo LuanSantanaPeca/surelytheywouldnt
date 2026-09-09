@@ -1,0 +1,53 @@
+.button{
+    z-index: 1;
+    &:hover{
+        cursor: pointer;
+        .button-margin1{
+            background-color: #c4c4c4;
+        }
+        .button-margin2{
+            background-color: #979797;
+        }
+        .button-margin3{
+            inset: -3px -4px -4px -3px;
+            background-color: #d6d6d6;
+        }
+        .button-margin4{
+            inset: -5px -4px -4px -5px;
+            background-color: #272727;
+        }
+        .button-bg{
+            background-color: #adadad;
+        }
+    }
+}
+.button-margin1{
+    position: absolute;
+    inset: 0 -2px -2px 0;
+    background-color: #909090;
+}
+.button-margin2{
+    position: absolute;
+    inset: -3px -2px -2px -3px;
+    background-color: #EAECF8;
+}
+.button-margin3{
+    position: absolute;
+    inset: -3px -5px -5px -3px;
+    background-color: #292929;
+}
+.button-margin4{
+    position: absolute;
+    inset: -5px -5px -5px -5px;
+    background-color: #909090;
+}
+.button-bg{
+    position: absolute;
+    inset: 0;
+    background-color: #C0C0C0;
+}
+
+.button-content{
+    position: relative;
+    z-index: 9;
+}

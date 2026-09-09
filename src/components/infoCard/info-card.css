@@ -1,0 +1,62 @@
+.info-card{
+    position: absolute;
+    background-color: #C0C0C0;
+    border: 1px solid #000;
+    padding: 1px 5px;
+    display: none;
+    z-index: 100;
+}
+.info-hover{
+    position: relative;
+    color: #000;
+    &:hover{
+        .info-card{
+            display: block;
+            z-index: 101;
+        }
+    }
+    .up{
+        .info-card-direction{
+            transform: rotate(180deg);
+            top:100%; left:10px;
+        }
+        .info-card-direction-border{
+            transform: rotate(180deg);
+            top:100%; left:9px;
+        }
+    }
+    .down{
+        .info-card-direction{
+            transform: rotate(0deg);
+            top:-70%; left:10px;
+        }
+        .info-card-direction-border{
+            transform: rotate(0deg);
+            top:-80%; left:9px;
+        }
+    }
+    .left{
+        .info-card-direction, .info-card-direction-border{
+            transform: rotate(90deg);
+        }
+    }
+    .right{
+        .info-card-direction, .info-card-direction-border{
+            transform: rotate(-90deg);
+        }
+    }
+}
+.info-card-direction{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #C0C0C0;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.info-card-direction-border{
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    background-color: #000;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}

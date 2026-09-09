@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import './shufflingTitle.css'
+import './shuffling-title.css'
 
 const SPECIAL_CHARS = [...'!@£$%&}{":;?><][+=-_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz']
 
@@ -133,7 +133,7 @@ class Title {
                     this.hoverRafIds.delete(span)
                     return
                 }
-                if (originalChar !== ' ' && frame % 5 === 0) {
+                if (originalChar !== ' ' && frame % 7 === 0) {
                     span.textContent = SPECIAL_CHARS[Math.floor(Math.random() * SPECIAL_CHARS.length)]
                 }
                 const id = requestAnimationFrame(() => scramble(frame + 1))
@@ -198,7 +198,7 @@ export function ShufflingTitleHoverLetter({ title, rootMargin, threshold }: { ti
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     instance.intersecting = true
-                    instance.animate()
+                    //instance.animate()
                 } /*else {
                     instance.reset()
                 }*/

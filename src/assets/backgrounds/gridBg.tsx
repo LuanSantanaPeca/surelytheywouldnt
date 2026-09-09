@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
-import './gridBg.css'
+import './grid-bg.css'
 
 type GridBgProps = {
     color?: string
@@ -65,17 +65,22 @@ export function GridBg({
 
             for (let row = 0; row < rows; row++) {
                 for (let col = 0; col < cols; col++) {
-                    context.fillRect(col * CELL_STEP, row * CELL_STEP, CELL_SIZE, CELL_SIZE)
                     if(random){
                         context.fillStyle = randomColors[Math.floor(Math.random() * randomColors.length)]
                     }
+                    context.fillRect(col * CELL_STEP, row * CELL_STEP, CELL_SIZE, CELL_SIZE)
                 }
             }
         }
 
         draw()
 
-        const observer = new ResizeObserver(draw)
+        const observer = new ResizeObserver(() => {
+            const nextW = wrapEl.clientWidth
+            const nextH = wrapEl.clientHeight
+            if (canvasEl.width === nextW * dpr && canvasEl.height === nextH * dpr) return
+            draw()
+        })
         observer.observe(wrapEl)
         window.addEventListener('resize', draw)
 
