@@ -103,7 +103,7 @@ export default function Home(){
                         <div className="popup-body-item">
                             <h3 className="popup-body-item-title">Luan Enrico Santana Peça</h3>
                             <p className="popup-body-item-text">Sou um programador e artista, atualmente cursando o 4° período de Engenharia de Software. Desde cedo vi uma 
-                                possibilidade muito grande de tranformação de software em arte (principalmente através dos jogos). Mais tarde, encontrei a música e o design como
+                                possibilidade muito grande de transformação de software em arte (principalmente através dos jogos). Mais tarde, encontrei a música e o design como
                                 outros meios de avançar ainda mais minha forma de ver e consumir as coisas.
                             </p>
                             <p className="popup-body-item-text">Estudei todo meu ensino médio no Colégio Sesi da Indústria, que possui uma metodologia de ensino baseada na
@@ -130,13 +130,90 @@ export default function Home(){
                 }
             >
                 <div className="popup-body">
-                    <h3>Popup</h3>
-                    <p>texto do popup</p>
-                    7° Feira de Ciências Júnior PUCPR
-                    3° Mostra Paralela da PUCPR
-                    SBPC JOVEM 2023- UFPR
-                    4° Edição da Mostra Nacional de Feiras de Ciências
-                    Indiretamente da XII Feira de Inovação das Ciências e Engenharias (FIciencias 2023)
+                    <div className="popup-body-item">
+                        <h3 className="popup-body-item-title">Entre os anos de 2022 e 2023 fiz parte de um projeto de iniciação científica na escola em que estudava.</h3>
+                        <p className="popup-body-item-text">O projeto, chamado Elementria, era basicamente um jogo de cartas (estilo super trunfo) didático, baseado na 
+                            tabela periódica. 
+                        </p>
+                        <div className="popup-body-img" style={{marginBottom: '35px', marginTop: '15px'}}>
+                            <img style={{height: '300px', width: '220px'}} src="imgs/iniciacaoCientifica/dorsoCartasElementria.png" alt="Carta do elemento carbono feita em MDF. Carbono está escrito no canto esquerdo superior do retângulo de madeira. No centro superior o símbolo do carbono (C). Abaixo do símbolo, massa atômica (12 u), densidade (3,51 g/cm³), raio atômico (70pm) e ponto de fusão (3550 °C) do carbono são especificados." />
+                            <p className='popup-body-img-subtitle'>Dorso das cartas/Logo do projeto</p>
+                        </div>
+                        <p className="popup-body-item-text">Cada carta era um elemento da tabela periódica, possuindo os respectivos valores de massa atômica, densidade, 
+                            raio atômico e ponto de fusão. Os valores escolhidos tinham o objetivo de, enquanto ensinando, também manter o jogo balanceado, e não somente 
+                            quanto maior sua massa atômica (assim também o seu número de elétrons, nêutrons, prótons, camadas de valência, etc) melhor.
+                        </p>
+                        <p className="popup-body-item-text">O jogo em si funcionava da seguinte forma:</p>
+                        <ul className="popup-body-item-list">
+                            <li>As cartas são embaralhadas e distribuídas igualmente para todos os jogadores, com as faces viradas para baixo.</li>
+                            <li>Cada jogador pega seu monte de cartas e pode ver seu baralho, mas não é permitido que a ordem das cartas seja rearranjada.</li>
+                            <li>Após a distribuição, o jogo segue uma fórmula repetida de rodadas: 
+                                <ul style={{margin: '5px 0 10px 15px'}}>
+                                    <li>O jogador que venceu a rodada anterior (o jogador que inicia o jogo pode ser escolhido aleatoriamente) escolhe uma das 4 categorias 
+                                        presentes em sua carta (idealmente escolhendo o valor com mais chance de ser o maior quando comparado com outras cartas).</li>
+                                    <li>Todos os jogadores revelam o valor de suas próprias cartas referentes à categoria selecionada.</li>
+                                    <li>O jogador com a carta com maior valor pega todas as cartas de seus oponentes e, juntamente com a carta que acabou de utilizar,
+                                        as coloca no final de seu baralho.
+                                    </li>
+                                    <li>Vence quem tiver todas as cartas ou, após um tempo determinado de jogo, possuir a maior quantidade de cartas em seu próprio baralho.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p className="popup-body-item-text">Além de ser um jogo educativo, o projeto também envolvia a acessibilidade do ensino proporcionado pelo jogo 
+                            para pessoas com deficiências visuais, possuindo braille (além do texto em português) para todas as informações da "carta".
+                        </p>
+                        <p className="popup-body-item-text">A ideia inicial era realmente ser um jogo de cartas tradicional, mas percebemos que dificilmente o papel aguentaria o 
+                            manuseio constante desse material, especialmente os relevos em braille, além também da limitação de tamanho mínimo em que esses relevos ainda são
+                            legíveis. Fizemos então, posteriormente, outros protótipos em MDF e acrílico que, por mais que tenham ficado longe da ideia inicial, ainda poderiam
+                            servir bem como material didático. Nas fotos seguintes o braille é meio difícil de enxergar, mas está dentro dos retângulos mais escuros embaixo 
+                            das informações.
+                        </p>
+                        <div className="popup-body-divided-sct-imgs" style={{marginTop: '25px', marginBottom: '40px'}}>
+                            <div className="popup-body-img">
+                                <img src="imgs/iniciacaoCientifica/cartaCMDF.png" alt="Carta do elemento carbono feita em MDF. Carbono está escrito no canto esquerdo superior do retângulo de madeira. No centro superior o símbolo do carbono (C). Abaixo do símbolo, massa atômica (12 u), densidade (3,51 g/cm³), raio atômico (70pm) e ponto de fusão (3550 °C) do carbono são especificados." />
+                                <p className='popup-body-img-subtitle'>Carta do elemento carbono feita em MDF</p>
+                            </div>
+                            <div className="popup-body-img">
+                                <img src="imgs/iniciacaoCientifica/cartasMDF.png" alt="Pilha de cartas com a mesma estrutura da carta da imagem anterior, com elementos variados como Fósforo, Sódio, Potássio e Cobre." />
+                                <p className='popup-body-img-subtitle'>Coleção de cartas produzidas em MDF de variados elementos</p>
+                            </div>
+                        </div>
+                        <p className="popup-body-item-text">No tempo que eu participei do projeto, tivemos a oportunidade de apresentar nossa ideia em diversas feiras e 
+                            exposições, sendo elas:
+                        </p>
+                        <ul className="popup-body-item-list">
+                            <li>7ª Feira de Ciências Júnior PUCPR + 3ª Mostra Paralela da PUCPR;</li>
+                            <li>SBPC JOVEM 2023 - UFPR;</li>
+                            <li>4ª Edição da Mostra Nacional de Feiras de Ciências;</li>
+                            <li>XII Feira de Inovação das Ciências e Engenharias - FIciencias 2023 (não consegui participar dessa feira, mas ainda fazia parte do projeto na época).</li>
+                        </ul>
+                        <div className="popup-body-divided-sct-imgs" style={{marginTop: '25px', marginBottom: '35px'}}>
+                            <div className="popup-body-img">
+                                <img src="imgs/iniciacaoCientifica/sbpc.png" alt="Equipe Elementria apresentando no SBPC JOVEM 2023. A equipe consiste de três mulheres e um homem, todos posando para a foto. Estão em um galpão, onde é possível ver outros estandes de projetos atrás. À frente, em uma mesa, estão expostos os materiais do projeto." />
+                                <p className='popup-body-img-subtitle'>Equipe Elementria apresentando no SBPC JOVEM 2023</p>
+                            </div>
+                            <div className="popup-body-img">
+                                <img src="imgs/iniciacaoCientifica/mcti.png" alt="Equipe Elementria no Ministério da Ciência, Tecnologia e Inovação. A equipe consiste de duas mulheres e dois homens. Um dos homens é o professor orientador. Todos os quatro posam para a foto segurando uma bandeira do Paraná. Ao fundo há uma bandeira do Brasil em um pedestal. À frente, há um estande com as letras MCTI em branco." />
+                                <p className='popup-body-img-subtitle'>Equipe Elementria no Ministério da Ciência, Tecnologia e Inovação</p>
+                            </div>
+                        </div>
+                        <div className="popup-body-img" style={{maxWidth: '550px', marginBottom: '35px'}}>
+                            <img src="imgs/iniciacaoCientifica/certificadoPUCPR.jpeg" alt="Carta do elemento carbono feita em MDF. Carbono está escrito no canto esquerdo superior do retângulo de madeira. No centro superior o símbolo do carbono (C). Abaixo do símbolo, massa atômica (12 u), densidade (3,51 g/cm³), raio atômico (70pm) e ponto de fusão (3550 °C) do carbono são especificados." />
+                            <p className='popup-body-img-subtitle'>Certificado de 2° Lugar na Categoria Voto Popular da 7ª Feira de Ciências Júnior PUCPR</p>
+                        </div>
+                    </div>
+
+                    <div className="popup-body-item"><p className="popup-body-item-text"><b>Infelizmente o projeto não está mais ativo e nunca chegou a realmente ser produzido, mas os registros do processo ainda existem em: </b></p></div>
+                    <a href="https://www.instagram.com/ic.elementria/" target="_blank" className="popup-list-button">
+                        <OldStyleButton>
+                            <div className="popup-list-button-text">
+                                <div className="light-bg">
+                                    <img src="/imgs/icons/instagramIcon.png" alt="Ícone do Instagram"></img>
+                                </div>
+                                <p>Instagram do Projeto!</p>
+                            </div>
+                        </OldStyleButton>
+                    </a>
                 </div>
             </Popup>
             <Popup isActive={isActiveProgramming} className='popup' title='Programação'
@@ -179,7 +256,7 @@ export default function Home(){
                     </a>
 
                     <div className="popup-body-item">
-                        <h3 className="popup-body-item-title">Aplicação para colaboração e.feito Social + Colégios Sociais Maristas - 2025</h3>
+                        <h3 className="popup-body-item-title">Aplicação Web para colaboração e.feito Social + Colégios Sociais Maristas - 2025</h3>
                         <p className="popup-body-item-text"> A aplicação é dividida em duas partes, a Landing Page e uma plataforma de gerenciamento. As duas partes foram
                             montadas com HTML, CSS e JavaScript.
                         </p>
