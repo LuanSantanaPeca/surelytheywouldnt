@@ -185,8 +185,10 @@
 
 
 .wordcraft-font{
-  font-family: 'Word Craft';
-  src: url('../../assets/fonts/WordCraft.otf');
+  @font-face{
+    font-family: 'Word Craft';
+    src: url('../../assets/fonts/WordCraft.otf');
+  }
 }
 .w95fa-font{
   font-family: 'W95FA';
