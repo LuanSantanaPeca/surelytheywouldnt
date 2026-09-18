@@ -1,0 +1,16 @@
+@font-face{
+  font-family: Word Craft;
+  src: url('/fonts/WordCraft-1jKrM.otf');
+}
+@font-face{
+  font-family: W95FA;
+    src: url('/fonts/W95F.otf');
+}
+
+
+.wordcraft-font{
+  font-family: Word Craft;
+}
+.w95fa-font{
+  font-family: W95FA;
+}

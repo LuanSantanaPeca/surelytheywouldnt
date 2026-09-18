@@ -2,6 +2,8 @@
 import { Routes, Route } from 'react-router-dom'
 import Logo from './pages/logo/Logo'
 import Home from './pages/home/Home'
+import './geral.css'
+
 
 function App() {
   return (
