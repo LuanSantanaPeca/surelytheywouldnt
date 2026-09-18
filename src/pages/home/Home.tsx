@@ -241,6 +241,10 @@ export default function Home(){
                         <p className="popup-body-item-text">Não é um projeto hosteado online, ou seja, para visualização será necessário o download do código na máquina.
                             Para rodar a aplicação siga as instruções do arquivo ReadMe do repositório.
                         </p>
+                        <p className="popup-body-item-text">Foi meu primeiro contato com desenvolvimento web e, por mais que simples, me mostrou que os grandes aplicativos
+                            podem ser quebrados em funcionalidades menores que, com algum esforço, podem ser replicadas e até melhoradas (não que tenha ocorrido a melhoria
+                            nesse caso).
+                        </p>
                     </div>
                     <a href="https://github.com/LuanSantanaPeca/fakepinterest" target="_blank" className="popup-list-button">
                         <OldStyleButton>
@@ -265,6 +269,10 @@ export default function Home(){
                         </p>
                         <p className="popup-body-item-text">Ao acessar a Landing Page, existem botões de "Entrar na Plataforma" e "Cadastrar-se". Esses botões levam às secções de login
                             e registro, respectivamente, da plataforma Amigo Marista. É necessário criar uma conta (grátis) para acessar a plataforma.
+                        </p>
+                        <p className="popup-body-item-text">Esse projeto foi meu primeiro contato real com bancos de dados, o que foi um desafio no início. No entanto, como era
+                            um sistema simples (pegar as informações do formulário e armazená-las) consegui eventualmente fazer com que funcionasse de forma adequada. Isso serviu
+                            como base para outros projetos, onde hoje mexo com o Supabase, utilizando diretamente SQL para realizar edições necessárias.
                         </p>
                         <span className="repository-warning popup-body-item-text">Infelizmente, por ser um projeto da empresa em que trabalho, e não meu, não posso disponibilizar o repositório. 
                             Ainda assim, atesto que a maior parte do código foi planejada e escrita por mim.
@@ -293,6 +301,9 @@ export default function Home(){
                             esse projetos, que permitem a transformação de qualquer elemento HTML em um elemento com a animação escolhida, sem alterar suas propriedades.
                         </p>
                         <p className="popup-body-item-text">O scroll da página também é controlado pelo site, ao invés de pelo navegador, a fim de dar uma sensação de rolagem mais "lisa".</p>
+                        <p className="popup-body-item-text">Foi nesse projeto que eu aprendi de fato a transformar um design pronto (no Figma nesse caso) em uma página real;
+                            quais elementos devem ser descartados ou alterados em prol da performance da aplicação e como alterar para que ele seja utilizável tanto no
+                            PC quanto no mobile (sem perder identidade).</p>
                         <span className="repository-warning popup-body-item-text">Infelizmente, por ser um projeto da empresa em que trabalho, e não meu, não posso disponibilizar o repositório. 
                             Ainda assim, atesto que a maior parte do código foi planejada e escrita por mim.
                         </span>
